@@ -21,6 +21,7 @@ public class ScrollableHistoryList extends JBPanel {
         JBScrollPane scrollPanel = new JBScrollPane(historyList);
         scrollPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         scrollPanel.setPreferredSize(new Dimension(150, 120));
+        scrollPanel.setMinimumSize(new Dimension(150, 120));
         setToolTipText(null);
 
         add(scrollPanel);

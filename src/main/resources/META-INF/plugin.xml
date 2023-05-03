@@ -21,6 +21,17 @@
     <br>
     ]]>
     </description>
+
+    <change-notes>
+        <![CDATA[
+      <ul>
+        <li><b>1.0.2</b> Future proofing - replacing use deprecated APIs.</li>
+        <li><b>1.0.1</b> Fixing issue caused drawing the history list when project does not have a git remote.</li>
+        <li><b>1.0</b> Release </li>
+      </ul>
+    ]]>
+    </change-notes>
+
     <depends>com.intellij.modules.platform</depends>
     <depends>Git4Idea</depends>
 

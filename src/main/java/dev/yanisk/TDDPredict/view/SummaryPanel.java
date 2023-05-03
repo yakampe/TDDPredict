@@ -14,6 +14,7 @@ public class SummaryPanel extends JBPanel {
         this.project = project;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setMaximumSize(new Dimension(150,250));
         addComponentsToPanel();
     }
 

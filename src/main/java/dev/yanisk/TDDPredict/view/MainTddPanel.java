@@ -5,6 +5,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.ui.components.JBPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MainTddPanel extends JBPanel {
     private final Project project;
@@ -14,11 +15,29 @@ public class MainTddPanel extends JBPanel {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        add(new ActionPanel(project));
-        add(new SummaryPanel(project));
-        add(createHistoryScrollPane());
-        add(createSettingsButton());
+        add(createAlignedPanel(new ActionPanel(project)));
+        add(createAlignedPanel(new SummaryPanel(project)));
+        add(createAlignedPanel(createHistoryScrollPane()));
+        add(createAlignedPanel(createSettingsButton()));
     }
+
+    private JPanel createAlignedPanel(JComponent component) {
+        return new JPanel() {
+            {
+                setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+                add(component);
+                setAlignmentY(TOP_ALIGNMENT);
+            }
+
+            @Override
+            public Dimension getMaximumSize() {
+                Dimension max = super.getMaximumSize();
+                max.height = getPreferredSize().height;
+                return max;
+            }
+        };
+    }
+
 
 
 
