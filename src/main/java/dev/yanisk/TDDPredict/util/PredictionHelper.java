@@ -41,7 +41,7 @@ public class PredictionHelper {
     }
 
     private static void executeSelectedConfiguration(Project project) {
-        ProgramRunnerUtil.executeConfiguration(project, getConfiguration(project), DefaultRunExecutor.getRunExecutorInstance());
+        ProgramRunnerUtil.executeConfiguration(getConfiguration(project), DefaultRunExecutor.getRunExecutorInstance());
     }
 
 
