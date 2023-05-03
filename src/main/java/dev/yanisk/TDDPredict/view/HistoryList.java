@@ -124,14 +124,17 @@ public class HistoryList extends JBPanel implements TestRunEventBus {
                 Icon icon = testRun.getPrediction() == Prediction.CORRECT ? AllIcons.RunConfigurations.TestPassed : AllIcons.RunConfigurations.TestFailed;
                 historyContent.add(new JLabel(icon), historyGbc);
 
-
-                if(project.getService(GitService.class).getGitRepository().getRemotes().size() > 0) {
-                    //icon
-                    historyGbc.gridx = 3;
-                    JButton viewCommitButton = createViewCommitButton(testRun.getCommit());
-                    historyContent.add(viewCommitButton, historyGbc);
-
+                try {
+                    if(project.getService(GitService.class).getGitRepository().getRemotes().size() > 0) {
+                        //icon
+                        historyGbc.gridx = 3;
+                        JButton viewCommitButton = createViewCommitButton(testRun.getCommit());
+                        historyContent.add(viewCommitButton, historyGbc);
+                    }
+                } catch (Exception e) {
+                    //Threw an exception on PyCharm - probably because no remotes but just wrapping into 1.0.1
                 }
+
 
             }
 
