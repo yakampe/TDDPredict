@@ -1,8 +1,9 @@
-package com.example.TDD.view;
+package dev.yanisk.TDDPredict.view;
 
-import com.example.TDD.models.Prediction;
-import com.example.TDD.state.TDDPredictStateComponent;
-import com.example.TDD.util.Constants;
+import com.intellij.ui.components.JBLabel;
+import dev.yanisk.TDDPredict.models.Prediction;
+import dev.yanisk.TDDPredict.state.TDDPredictStateComponent;
+import dev.yanisk.TDDPredict.util.Constants;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.components.JBPanel;
@@ -28,8 +29,8 @@ public class PredictionStatisticsPanel extends JBPanel {
     }
 
     private void createIncorrectPredictionsPanel() {
-        JPanel incorrectPredictionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        JLabel incorrectPredictions = new JLabel(AllIcons.RunConfigurations.TestFailed);
+        JBPanel incorrectPredictionsPanel = new JBPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        JBLabel incorrectPredictions = new JBLabel(AllIcons.RunConfigurations.TestFailed);
         incorrectPredictions.setToolTipText("Incorrect Predictions");
         incorrectPredictionsPanel.add(incorrectPredictions);
         incorrectPredictionsPanel.add(incorrectGuessCounterLabel);
@@ -37,8 +38,8 @@ public class PredictionStatisticsPanel extends JBPanel {
     }
 
     private void createCorrectPredictionsPanel() {
-        JPanel correctPredictionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        JLabel correctPredictions = new JLabel(AllIcons.RunConfigurations.TestPassed);
+        JBPanel correctPredictionsPanel = new JBPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        JBLabel correctPredictions = new JBLabel(AllIcons.RunConfigurations.TestPassed);
         correctPredictions.setToolTipText("Correct Predictions");
         correctPredictionsPanel.add(correctPredictions);
         correctPredictionsPanel.add(correctGuessCounterLabel);

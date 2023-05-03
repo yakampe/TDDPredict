@@ -1,10 +1,10 @@
-package com.example.TDD.view;
+package dev.yanisk.TDDPredict.view;
 
-import com.example.TDD.state.TDDPredictStateComponent;
-import com.example.TDD.util.Constants;
+import com.intellij.ui.components.JBPanel;
+import dev.yanisk.TDDPredict.state.TDDPredictStateComponent;
+import dev.yanisk.TDDPredict.util.Constants;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.ui.components.JBCheckBox;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -24,15 +24,15 @@ public class SettingsDialog extends DialogWrapper {
 
     @Override
     protected @Nullable JComponent createCenterPanel() {
-        JPanel dialogPanel = new JPanel(new BorderLayout());
+        JBPanel dialogPanel = new JBPanel(new BorderLayout());
 
-        JBCheckBox gitCheckbox = new JBCheckBox();
-        gitCheckbox.setText("Git Commit");
-        gitCheckbox.addActionListener(e -> {
-            System.out.println(e.getActionCommand());
-        });
-
-        dialogPanel.add(gitCheckbox, BorderLayout.NORTH);
+//        JBCheckBox gitCheckbox = new JBCheckBox();
+//        gitCheckbox.setText("Git Commit");
+//        gitCheckbox.addActionListener(e -> {
+//            System.out.println(e.getActionCommand());
+//        });
+//
+//        dialogPanel.add(gitCheckbox, BorderLayout.NORTH);
         dialogPanel.add(createDeleteDataButton(), BorderLayout.CENTER);
 
 
@@ -40,11 +40,11 @@ public class SettingsDialog extends DialogWrapper {
         return dialogPanel;
     }
 
-    private JPanel createDeleteDataButton() {
-        JPanel buttonsBottomPanel = new JPanel(new GridLayout(1, 1));
+    private JBPanel createDeleteDataButton() {
+        JBPanel buttonsBottomPanel = new JBPanel(new GridLayout(1, 1));
 
         JButton deleteDataButton = createButton("Delete Data", e -> {
-            Dialog dialog = new Dialog("Are you sure?","This will delete all data for this project.");
+            dev.yanisk.TDDPredict.view.Dialog dialog = new Dialog("Are you sure?","This will delete all data for this project.");
 
             if(dialog.showAndGet()) {
                 project.getService(TDDPredictStateComponent.class).clearTestHistory();

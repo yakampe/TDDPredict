@@ -1,6 +1,7 @@
-package com.example.TDD.view;
+package dev.yanisk.TDDPredict.view;
 
-import com.example.TDD.util.PredictionHelper;
+import com.intellij.ui.components.JBPanel;
+import dev.yanisk.TDDPredict.util.PredictionHelper;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
 
@@ -8,12 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class ActionPanel extends JPanel {
+public class ActionPanel extends JBPanel {
     private final Project project;
 
     public ActionPanel(Project project) {
         this.project = project;
-        JPanel northPanel = new JPanel();
+        JBPanel northPanel = new JBPanel();
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.add(createPredictLabel());
         northPanel.add(createButtonsPanel());
@@ -27,15 +28,15 @@ public class ActionPanel extends JPanel {
         return predictLabel;
     }
 
-    private JPanel createButtonsPanel() {
-        JPanel buttonsPanel = new JPanel(new GridLayout(1, 2));
+    private JBPanel createButtonsPanel() {
+        JBPanel buttonsPanel = new JBPanel(new GridLayout(1, 2));
         String passButtonText = "Pass  "; //Added padding because doesn't look centered
         JButton predictPassButton = createButton(passButtonText, AllIcons.RunConfigurations.TestPassed,e -> {
             PredictionHelper.greenPredictCalled(project);
         });
 
         String failButtonText = "Fail  "; //Added padding because doesn't look centered
-        JButton predictFailButton = createButton("Fail  ",AllIcons.RunConfigurations.TestError, e -> {
+        JButton predictFailButton = createButton(failButtonText,AllIcons.RunConfigurations.TestError, e -> {
             PredictionHelper.redPredictCalled(project);
         });
 //        JButton predictExecutionFailButton = createButton("BREAK", e -> {

@@ -1,20 +1,16 @@
-package com.example.TDD.view;
+package dev.yanisk.TDDPredict.view;
 
-import com.example.TDD.models.Prediction;
-import com.example.TDD.models.TestRunOutcome;
-import com.example.TDD.state.TDDPredictStateComponent;
-import com.example.TDD.util.Constants;
+import dev.yanisk.TDDPredict.models.TestRunOutcome;
+import dev.yanisk.TDDPredict.state.TDDPredictStateComponent;
+import dev.yanisk.TDDPredict.util.Constants;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.components.JBPanel;
+import dev.yanisk.TDDPredict.util.ButtonColors;
 
-import javax.swing.*;
 import java.awt.*;
-
-import static com.example.TDD.util.ButtonColors.*;
 
 public class TestOutcomePanel extends JBPanel {
 
-    private final int circleSize = 14;
     private final Project project;
     private CounterLabel testsPassedCounterLabel;
     private CounterLabel testsFailedCounterLabel;
@@ -27,9 +23,9 @@ public class TestOutcomePanel extends JBPanel {
         loadCounterData();
 
         setLayout(new GridLayout(1, 3, 5, 5));
-        add(createCircleWithCounter(TEST_PASS_COLOR, testsPassedCounterLabel, "Tests Passed"));
-        add(createCircleWithCounter(TEST_FAIL_COLOR, testsFailedCounterLabel, "Tests Failed"));
-        add(createCircleWithCounter(TEST_DID_NOT_RUN_COLOR, testNotExecutedCounterLabel, "Tests did not run after prediction"));
+        add(createCircleWithCounter(ButtonColors.TEST_PASS_COLOR, testsPassedCounterLabel, "Tests Passed"));
+        add(createCircleWithCounter(ButtonColors.TEST_FAIL_COLOR, testsFailedCounterLabel, "Tests Failed"));
+//        add(createCircleWithCounter(ButtonColors.TEST_DID_NOT_RUN_COLOR, testNotExecutedCounterLabel, "Tests did not run after prediction"));
 
     }
 
@@ -40,9 +36,10 @@ public class TestOutcomePanel extends JBPanel {
     }
 
 
-    private JPanel createCircleWithCounter(Color color, CounterLabel counterLabel, String tooltip) {
-        JPanel circleWithCounterPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+    private JBPanel createCircleWithCounter(Color color, CounterLabel counterLabel, String tooltip) {
+        JBPanel circleWithCounterPanel = new JBPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
+        int circleSize = 14;
         Circle circle = new Circle(color, circleSize, tooltip);
         circleWithCounterPanel.add(circle);
         circleWithCounterPanel.add(counterLabel);

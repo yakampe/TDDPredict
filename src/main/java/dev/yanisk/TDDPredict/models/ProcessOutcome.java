@@ -1,5 +1,5 @@
-package com.example.TDD.models;
+package dev.yanisk.TDDPredict.models;
 
 public enum ProcessOutcome {
-    TEST_FINISHED
+    TEST_FAILED, TEST_TERMINATED, TEST_PASS
 }

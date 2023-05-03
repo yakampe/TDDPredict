@@ -1,25 +1,36 @@
-package com.example.TDD.view;
+package dev.yanisk.TDDPredict.view;
 
-import com.example.TDD.models.Prediction;
-import com.example.TDD.models.TestRun;
+import com.intellij.ide.BrowserUtil;
+import git4idea.repo.GitRemote;
+
+import java.util.*;
+
+import com.intellij.openapi.project.Project;
+import com.intellij.ui.components.JBPanel;
+import dev.yanisk.TDDPredict.bus.TestRunEventBus;
+import dev.yanisk.TDDPredict.models.Prediction;
+import dev.yanisk.TDDPredict.models.TestRun;
 import com.intellij.icons.AllIcons;
 import com.intellij.ui.components.JBLabel;
+import dev.yanisk.TDDPredict.service.GitService;
+import dev.yanisk.TDDPredict.util.ButtonColors;
+import git4idea.repo.GitRepository;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
 
-import static com.example.TDD.util.ButtonColors.*;
+public class HistoryList extends JBPanel implements TestRunEventBus {
 
-public class HistoryList extends JPanel {
 
+    private final Project project;
     LinkedList<TestRun> testHistory = new LinkedList<>();
 
-    public HistoryList() {
+    public HistoryList(Project project) {
+        this.project = project;
+        project.getMessageBus().connect().subscribe(TestRunEventBus.TEST_RUN_EVENT_BUS, this);
         this.setLayout(new BorderLayout());
     }
 
@@ -31,13 +42,10 @@ public class HistoryList extends JPanel {
 
     private void setupRefreshTimer(int delay) {
         // Set up timer to regenerate history list every minute
-        Timer timer = new Timer(60000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (testHistory.size() != 0) {
-                    removeAll();
-                    generateHistoryList();
-                }
+        Timer timer = new Timer(delay, e -> {
+            if (testHistory.size() != 0) {
+                removeAll();
+                generateHistoryList();
             }
         });
         timer.start();
@@ -61,10 +69,10 @@ public class HistoryList extends JPanel {
 
     private void extracted() {
         if (testHistory.size() == 0) {
-            add(new JBLabel("No Predictions", SwingConstants.CENTER), BorderLayout.NORTH);
+            add(new JBLabel("No predictions", SwingConstants.CENTER), BorderLayout.NORTH);
         } else {
             removeAll();
-            JPanel historyContent = new JPanel(new GridBagLayout());
+            JBPanel historyContent = new JBPanel(new GridBagLayout());
             GridBagConstraints historyGbc = new GridBagConstraints();
             historyGbc.insets = new Insets(5, 5, 5, 5);
 
@@ -97,17 +105,17 @@ public class HistoryList extends JPanel {
 
                 switch (testRun.getTestRunOutcome()) {
                     case PASSED:
-                        circleColor = TEST_PASS_COLOR;
+                        circleColor = ButtonColors.TEST_PASS_COLOR;
                         break;
                     case FAILED:
-                        circleColor = TEST_FAIL_COLOR;
+                        circleColor = ButtonColors.TEST_FAIL_COLOR;
                         break;
                     case NOT_EXECUTED:
-                        circleColor = TEST_DID_NOT_RUN_COLOR;
+                        circleColor = ButtonColors.TEST_DID_NOT_RUN_COLOR;
                         break;
                 }
 
-                JPanel exampleGreenCirclePanel = new Circle(circleColor, 14, testRun.getCommit());
+                JBPanel exampleGreenCirclePanel = new Circle(circleColor, 14, testRun.getCommit());
                 historyContent.add(exampleGreenCirclePanel, historyGbc);
 
                 //icon
@@ -115,10 +123,51 @@ public class HistoryList extends JPanel {
 
                 Icon icon = testRun.getPrediction() == Prediction.CORRECT ? AllIcons.RunConfigurations.TestPassed : AllIcons.RunConfigurations.TestFailed;
                 historyContent.add(new JLabel(icon), historyGbc);
+
+
+                if(project.getService(GitService.class).getGitRepository().getRemotes().size() > 0) {
+                    //icon
+                    historyGbc.gridx = 3;
+                    JButton viewCommitButton = createViewCommitButton(testRun.getCommit());
+                    historyContent.add(viewCommitButton, historyGbc);
+
+                }
+
             }
 
             add(historyContent, BorderLayout.NORTH);
         }
+    }
+
+    private JButton createViewCommitButton(String commitHash) {
+        Icon viewIcon = AllIcons.Actions.Preview;
+        JButton viewCommitButton = new JButton(viewIcon);
+        // Remove button elements
+        viewCommitButton.setOpaque(false);
+        viewCommitButton.setContentAreaFilled(false);
+        viewCommitButton.setBorderPainted(false);
+        viewCommitButton.setFocusPainted(false);
+        viewCommitButton.setToolTipText("View");
+        // Remove margin
+        viewCommitButton.setMargin(new Insets(0, 0, 0, 0));
+        viewCommitButton.setPreferredSize(new Dimension(14,14));
+        viewCommitButton.addActionListener(e -> {
+            GitRepository repository = project.getService(GitService.class).getGitRepository(); // Your GitRepository instance here
+
+            Set<GitRemote> remotes =  new HashSet<>(repository.getRemotes());
+            if (!remotes.isEmpty()) {
+                GitRemote remote = remotes.iterator().next();
+                String remoteUrl = remote.getFirstUrl();
+
+                if (remoteUrl != null) {
+                    String baseUrl = remote.getFirstUrl().replaceFirst("\\.git","/");
+                    String commitUrl = baseUrl + "/commit/" + commitHash;
+                    BrowserUtil.browse(commitUrl);
+                }
+            }
+        });
+
+        return viewCommitButton;
     }
 
     private String getTimeString(long secondsSinceExecution) {
@@ -134,4 +183,8 @@ public class HistoryList extends JPanel {
         }
     }
 
+    @Override
+    public void testRunProcessed(TestRun testRun) {
+        addTestRun(testRun);
+    }
 }

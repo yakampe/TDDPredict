@@ -1,9 +1,10 @@
-package com.example.TDD.view;
+package dev.yanisk.TDDPredict.view;
 
-import javax.swing.*;
+import com.intellij.ui.components.JBPanel;
+
 import java.awt.*;
 
-public class Circle extends JPanel {
+public class Circle extends JBPanel {
 
     private final Color color;
     private final int circleSize;

@@ -1,7 +1,8 @@
-package com.example.TDD.listeners;
+package dev.yanisk.TDDPredict.listeners;
 
-import com.example.TDD.models.TestRunOutcome;
-import com.example.TDD.state.TDDPredictStateComponent;
+import dev.yanisk.TDDPredict.models.ProcessOutcome;
+import dev.yanisk.TDDPredict.service.PredictionProcessorService;
+import dev.yanisk.TDDPredict.state.TDDPredictStateComponent;
 import com.intellij.execution.testframework.sm.runner.SMTRunnerEventsListener;
 import com.intellij.execution.testframework.sm.runner.SMTestProxy;
 import com.intellij.openapi.project.Project;
@@ -9,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class TestListener implements SMTRunnerEventsListener {
-
     private final Project project;
 
     public TestListener(Project project) {
@@ -17,19 +17,20 @@ public class TestListener implements SMTRunnerEventsListener {
     }
 
     @Override
-    public void onTestingStarted(SMTestProxy.@NotNull SMRootTestProxy testsRoot) {
-
-    }
-
-
-    @Override
     public void onTestingFinished(SMTestProxy.@NotNull SMRootTestProxy testsRoot) {
         TDDPredictStateComponent tddPredictStateComponent = project.getService(TDDPredictStateComponent.class);
 
         if(tddPredictStateComponent.getTestHistory().size() > 0) {
-            TestRunOutcome testRunOutcome = testsRoot.isPassed() ? TestRunOutcome.PASSED : TestRunOutcome.FAILED;
-            tddPredictStateComponent.recordTestOutcome(testRunOutcome);
+            ProcessOutcome processOutcome = testsRoot.isPassed() ? ProcessOutcome.TEST_PASS : ProcessOutcome.TEST_FAILED;
+
+            PredictionProcessorService predictionProcessorService = project.getService(PredictionProcessorService.class);
+            predictionProcessorService.processPrediction(processOutcome);
         }
+    }
+
+    @Override
+    public void onTestingStarted(SMTestProxy.@NotNull SMRootTestProxy testsRoot) {
+
     }
 
     @Override

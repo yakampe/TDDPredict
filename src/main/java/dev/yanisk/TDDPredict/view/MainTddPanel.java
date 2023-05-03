@@ -1,4 +1,4 @@
-package com.example.TDD.view;
+package dev.yanisk.TDDPredict.view;
 
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.project.Project;
@@ -6,8 +6,8 @@ import com.intellij.ui.components.JBPanel;
 
 import javax.swing.*;
 
-public class MainTddPanel extends JPanel {
-    private Project project;
+public class MainTddPanel extends JBPanel {
+    private final Project project;
 
     public MainTddPanel(Project project) {
         this.project = project;

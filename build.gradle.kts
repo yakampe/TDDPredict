@@ -3,11 +3,21 @@ plugins {
     id("org.jetbrains.intellij") version "1.10.1"
 }
 
-group = "com.example"
-version = "1.0-SNAPSHOT"
+group = "dev.yanisk"
+version = "1.0"
+
 
 repositories {
     mavenCentral()
+
+}
+dependencies {
+    testImplementation("org.mockito:mockito-junit-jupiter:5.3.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.9.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    testImplementation("org.junit.platform:junit-platform-launcher:1.9.2")
+    testImplementation("org.junit.platform:junit-platform-runner:1.9.2")
 }
 
 // Configure Gradle IntelliJ Plugin
@@ -15,9 +25,10 @@ repositories {
 intellij {
     version.set("2022.1.4")
     type.set("IC") // Target IDE Platform
-
-    plugins.set(listOf(/* Plugin Dependencies */))
+    plugins.set(listOf("git4idea"))
 }
+
+
 
 tasks {
     // Set the JVM compatibility versions
@@ -39,5 +50,9 @@ tasks {
 
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
+    }
+
+    test {
+        useJUnitPlatform()
     }
 }

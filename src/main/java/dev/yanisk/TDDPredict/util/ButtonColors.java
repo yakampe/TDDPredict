@@ -1,4 +1,4 @@
-package com.example.TDD.util;
+package dev.yanisk.TDDPredict.util;
 
 import java.awt.*;
 

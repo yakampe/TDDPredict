@@ -1,17 +1,19 @@
-package com.example.TDD.service;
+package dev.yanisk.TDDPredict.service;
 
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.project.Project;
+import dev.yanisk.TDDPredict.models.TestRun;
+import git4idea.repo.GitRepository;
 
 @Service(Service.Level.PROJECT)
 public final class GitService {
-    private final Project myProject;
 
     private boolean continuousCommitEnabled;
     private String currentCommit;
 
+    private GitRepository gitRepository;
+
     public GitService(Project project) {
-        myProject = project;
     }
 
     public void setCurrentCommit(String currentCommit) {
@@ -22,11 +24,15 @@ public final class GitService {
         return currentCommit;
     }
 
-    public boolean isContinuousCommitEnabled() {
-        return continuousCommitEnabled;
+    public void addCommitNumberToTestRun(TestRun testRun) {
+        testRun.setCommit(getCurrentCommit());
     }
 
-    public void setContinuousCommitEnabled(boolean continuousCommitEnabled) {
-        this.continuousCommitEnabled = continuousCommitEnabled;
+    public GitRepository getGitRepository() {
+        return gitRepository;
+    }
+
+    public void setGitRepository(GitRepository gitRepository) {
+        this.gitRepository = gitRepository;
     }
 }

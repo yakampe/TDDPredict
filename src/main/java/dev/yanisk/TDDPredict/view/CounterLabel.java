@@ -1,4 +1,4 @@
-package com.example.TDD.view;
+package dev.yanisk.TDDPredict.view;
 
 import javax.swing.*;
 
@@ -9,9 +9,6 @@ public class CounterLabel extends JLabel {
 
     }
 
-    public CounterLabel(long calculateGuesses) {
-        this.count = calculateGuesses;
-    }
 
     public void incrementCount() {
         count++;

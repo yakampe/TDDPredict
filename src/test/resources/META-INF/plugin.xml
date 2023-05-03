@@ -1,35 +1,42 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
     <id>dev.yanisk</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
     <name>TDD Predict</name>
-    <vendor>Jānis Kampe</vendor>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor url="https://www.yanisk.dev">Jānis Kampe</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    Here's the updated description formatted in the requested tags:
+
     <description><![CDATA[
     This plugin is designed to enhance the Test-Driven Development (TDD) experience. Key features include:
+
       <ul>
         <li>Simple TDD workflow: Press one of three prediction buttons - 'PASS' or 'FAIL' - to trigger the run configuration and perform the test.</li>
         <li>Prediction tracking: The plugin records the outcome of the test and your prediction, allowing you to keep track of your correct and incorrect predictions. This helps you focus on each step.</li>
         <li>History tracking: The plugin maintains a history of your predictions per project.</li>
         <li>Multi Language support: The plugin has been tested and confirmed to work with Java and Python test runners.</li>
       </ul>
-    Overall, this plugin aims to make TDD more fun and a more gamified experience when doing katas or general development.<br>
-
-    For more information, check out the plugin's GitHub repository: <a href="https://github.com/yakampe/TDDPredict">https://github.com/yakampe/TDDPredict</a>.
-    If you encounter any issues or have suggestions for improvements, please report them on the GitHub issue tracker: <a href="https://github.com/yakampe/TDDPredict/issues">https://github.com/yakampe/TDDPredict/issues</a>.
-    <br>
-    <br>
-    <a href="https://www.buymeacoffee.com/yaniskampe" target="_blank">Buy Me A Coffee</a>
-    <br>
+      Overall, this plugin aims to make TDD more fun and a more gamified experience when doing katas or general development.
+      <br>
     ]]>
     </description>
+
     <depends>com.intellij.modules.platform</depends>
     <depends>Git4Idea</depends>
-
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="dev.yanisk.TDDPredict.state.TDDPredictStateComponent"/>
         <toolWindow id="TDD Predict"
                     anchor="bottom"
                     factoryClass="dev.yanisk.TDDPredict.TDDStatsToolWindow"
-                    icon="/META-INF/small-icon.svg"/>
+                    icon="/META-INF/small-logo.svg"/>
     </extensions>
 
     <projectListeners>

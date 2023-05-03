@@ -1,12 +1,10 @@
-package com.example.TDD.state;
+package dev.yanisk.TDDPredict.state;
 
-import com.example.TDD.models.TestRun;
+import dev.yanisk.TDDPredict.models.TestRun;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.intellij.util.xmlb.annotations.XCollection;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class TDDPredictState {
 

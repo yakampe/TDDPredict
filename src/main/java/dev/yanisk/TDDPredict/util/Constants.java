@@ -1,7 +1,7 @@
-package com.example.TDD.util;
+package dev.yanisk.TDDPredict.util;
 
-import com.example.TDD.view.CounterLabel;
-import com.example.TDD.view.HistoryList;
+import dev.yanisk.TDDPredict.view.CounterLabel;
+import dev.yanisk.TDDPredict.view.HistoryList;
 import com.intellij.openapi.util.Key;
 
 public class Constants {

@@ -1,4 +1,4 @@
-package com.example.TDD.models;
+package dev.yanisk.TDDPredict.models;
 
 import com.intellij.util.xmlb.annotations.Attribute;
 import com.intellij.util.xmlb.annotations.Tag;

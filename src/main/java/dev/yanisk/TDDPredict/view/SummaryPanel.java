@@ -1,13 +1,14 @@
-package com.example.TDD.view;
+package dev.yanisk.TDDPredict.view;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.ui.components.JBPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class SummaryPanel extends JPanel {
+public class SummaryPanel extends JBPanel {
 
-    private Project project;
+    private final Project project;
 
     public SummaryPanel(Project project) {
         this.project = project;
