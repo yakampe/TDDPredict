@@ -1,5 +1,7 @@
 # Test-Driven Development (TDD) Enhancement Plugin for IntelliJ
 
+[JetBrains Marketplace Link](https://plugins.jetbrains.com/plugin/21641-tdd-predict)
+
 ![TDDPredict](https://cdn.discordapp.com/attachments/1077304012329721856/1103153885025140807/TDDPredict.gif)
 
 The TDD Enhancement Plugin is designed to make Test-Driven Development more enjoyable and gamified, especially when doing katas or general development. This plugin streamlines the TDD workflow and allows you to easily track your test predictions and history.
