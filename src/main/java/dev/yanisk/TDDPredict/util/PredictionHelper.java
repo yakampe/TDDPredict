@@ -28,7 +28,7 @@ public class PredictionHelper {
     public static void redPredictCalled(Project project) {
         SettingsStateComponent settingsStateComponent = project.getService(SettingsStateComponent.class);
         if(settingsStateComponent.getState().predictionPopupDisabled) {
-            predictPass(project);
+            predictFail(project);
         } else {
             Dialog dialog = new Dialog("Predicting FAIL","Predicting tests will FAIL!");
             if(dialog.showAndGet()) {
