@@ -36,6 +36,24 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>Git4Idea</depends>
 
+    <actions>
+        <action id="TDDPredict.PredictPassAction"
+                class="dev.yanisk.TDDPredict.actions.PredictPassAction"
+                text="Predict Pass"
+                description="Predict Tests Will Pass With TDD Predict">
+            <keyboard-shortcut first-keystroke="ctrl alt 1" keymap="$default"/>
+            <keyboard-shortcut first-keystroke="meta alt 1" keymap="Mac OS X"/>
+        </action>
+        <action id="TDDPredict.PredictFailAction"
+                class="dev.yanisk.TDDPredict.actions.PredictFailAction"
+                text="Predict Fail"
+                description="Predict Tests Will Fail With TDD Predict">
+            <keyboard-shortcut first-keystroke="ctrl alt 2" keymap="$default"/>
+            <keyboard-shortcut first-keystroke="meta alt 2" keymap="Mac OS X"/>
+        </action>
+    </actions>
+
+
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="dev.yanisk.TDDPredict.state.TDDPredictStateComponent"/>
         <projectService serviceImplementation="dev.yanisk.TDDPredict.state.SettingsStateComponent"/>

@@ -26,7 +26,7 @@ public class PredictionHelper {
     }
 
     public static void redPredictCalled(Project project) {
-        SettingsStateComponent settingsStateComponent = ServiceManager.getService(SettingsStateComponent.class);
+        SettingsStateComponent settingsStateComponent = project.getService(SettingsStateComponent.class);
         if(settingsStateComponent.getState().predictionPopupDisabled) {
             predictPass(project);
         } else {
