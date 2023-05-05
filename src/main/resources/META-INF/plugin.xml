@@ -38,6 +38,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="dev.yanisk.TDDPredict.state.TDDPredictStateComponent"/>
+        <projectService serviceImplementation="dev.yanisk.TDDPredict.state.SettingsStateComponent"/>
         <toolWindow id="TDD Predict"
                     anchor="bottom"
                     factoryClass="dev.yanisk.TDDPredict.TDDStatsToolWindow"

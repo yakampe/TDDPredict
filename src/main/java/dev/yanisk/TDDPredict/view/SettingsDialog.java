@@ -1,6 +1,8 @@
 package dev.yanisk.TDDPredict.view;
 
+import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBPanel;
+import dev.yanisk.TDDPredict.state.SettingsStateComponent;
 import dev.yanisk.TDDPredict.state.TDDPredictStateComponent;
 import dev.yanisk.TDDPredict.util.Constants;
 import com.intellij.openapi.project.Project;
@@ -26,13 +28,21 @@ public class SettingsDialog extends DialogWrapper {
     protected @Nullable JComponent createCenterPanel() {
         JBPanel dialogPanel = new JBPanel(new BorderLayout());
 
-//        JBCheckBox gitCheckbox = new JBCheckBox();
-//        gitCheckbox.setText("Git Commit");
-//        gitCheckbox.addActionListener(e -> {
-//            System.out.println(e.getActionCommand());
-//        });
-//
-//        dialogPanel.add(gitCheckbox, BorderLayout.NORTH);
+        SettingsStateComponent settingsStateComponent = project.getService(SettingsStateComponent.class);
+
+        JBCheckBox gitCheckbox = new JBCheckBox();
+        gitCheckbox.setText("Disable Prediction Popup");
+        gitCheckbox.setSelected(settingsStateComponent.getState().predictionPopupDisabled);
+
+        gitCheckbox.addActionListener(e -> {
+            if(gitCheckbox.isSelected()) {
+                settingsStateComponent.getState().predictionPopupDisabled = true;
+            } else {
+                settingsStateComponent.getState().predictionPopupDisabled = false;
+            }
+        });
+
+        dialogPanel.add(gitCheckbox, BorderLayout.NORTH);
         dialogPanel.add(createDeleteDataButton(), BorderLayout.CENTER);
 
 
