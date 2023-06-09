@@ -24,9 +24,8 @@ import java.time.LocalDateTime;
 
 public class HistoryList extends JBPanel implements TestRunEventBus {
 
-
     private final Project project;
-    LinkedList<TestRun> testHistory = new LinkedList<>();
+    private final LinkedList<TestRun> testHistory = new LinkedList<>();
 
     public HistoryList(Project project) {
         this.project = project;
@@ -58,7 +57,7 @@ public class HistoryList extends JBPanel implements TestRunEventBus {
     }
 
     public void removeHistory() {
-        testHistory = new LinkedList<>();
+        testHistory.clear();
         this.removeAll();
         generateHistoryList();
     }
@@ -78,6 +77,12 @@ public class HistoryList extends JBPanel implements TestRunEventBus {
 
             for (int i = 0; i < testHistory.size(); i++) {
                 TestRun testRun = testHistory.get(i);
+
+                //do not show items without test run outcome
+                if (testRun.getTestRunOutcome() == null) {
+                    continue;
+                }
+
                 // time
                 historyGbc.gridy = i;
                 historyGbc.gridx = 0;
