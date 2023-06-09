@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="TDD_Predict.main:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/TDD_Predict_main_jar</output-path>
-    <root id="archive" name="TDD_Predict.main.jar">
-      <element id="module-output" name="TDD_Predict.main" />
-    </root>
-  </artifact>
-</component>
