@@ -25,10 +25,11 @@
     <change-notes>
         <![CDATA[
       <ul>
+        <li><b>1.0.5</b> Fixing plugin crash on Android Studio.</li>
         <li><b>1.0.4</b>
             <ul>
                 <li>Ability to disable the prediction popup</li>
-                <li>Ability to run shortcuts PASS (CTRL + ALT + 1) or FAIL (CTRL + ALT + 2)
+                <li>Ability to run shortcuts PASS (CTRL + ALT + 1) or FAIL (CTRL + ALT + 2)</li>
             </ul>
         </li>
         <li><b>1.0.3</b> Future proofing - replacing use of deprecated APIs.</li>
