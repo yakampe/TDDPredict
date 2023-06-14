@@ -1,0 +1,30 @@
+name: Deploy Plugin to JetBrains Marketplace
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          
+      - name: Set execute permission on gradlew
+        run: chmod +x gradlew
+        
+      - name: Build Plugin
+        run: ./gradlew buildPlugin
+
+      - name: Publish to JetBrains Marketplace
+        run: ./gradlew publishPlugin
+        env:
+          ORG_GRADLE_PROJECT_intellijPublishToken: ${{ secrets.JETBRAINS_API_TOKEN }}
