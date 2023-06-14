@@ -25,6 +25,7 @@
     <change-notes>
         <![CDATA[
       <ul>
+        <li><b>1.0.6</b> Fixing an issue where release 1.0.5 lost functionality released in 1.0.4.</li>
         <li><b>1.0.5</b> Fixing plugin crash on Android Studio.</li>
         <li><b>1.0.4</b>
             <ul>
