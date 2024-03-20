@@ -19,7 +19,6 @@ class PredictionProcessorServiceTest {
 
     PredictionProcessorService predictionProcessorService;
 
-    GitService gitService;
     private TestRunEventPublisherService testRunEventPublisherService;
 
     @BeforeEach
@@ -29,11 +28,9 @@ class PredictionProcessorServiceTest {
 
 
         tddPredictStateComponent = mock(TDDPredictStateComponent.class);
-        gitService = mock(GitService.class);
         testRunEventPublisherService = mock(TestRunEventPublisherService.class);
 
         when(project.getService(TDDPredictStateComponent.class)).thenReturn(tddPredictStateComponent);
-        when(project.getService(GitService.class)).thenReturn(gitService);
         when(project.getService(TestRunEventPublisherService.class)).thenReturn(testRunEventPublisherService);
     }
 
@@ -137,15 +134,6 @@ class PredictionProcessorServiceTest {
         verify(testRunEventPublisherService).publishTestRunProcessed(testRunArgumentCaptor.capture());
         assertEquals(Prediction.INCORRECT, testRunArgumentCaptor.getValue().getPrediction());
         assertEquals(TestRunOutcome.FAILED, testRunArgumentCaptor.getValue().getTestRunOutcome());
-    }
-
-    @Test
-    void should_add_current_commit_to_test_run() {
-        TestRun testRun = new TestRun(null, null,null,null,null);
-        when(tddPredictStateComponent.getLatestTest()).thenReturn(testRun);
-
-        predictionProcessorService.processPrediction(ProcessOutcome.TEST_FAILED);
-        verify(gitService).addCommitNumberToTestRun(any(TestRun.class));
     }
 
 }
