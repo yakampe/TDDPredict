@@ -46,7 +46,6 @@ public final class PredictionProcessorService {
 
         }
 
-        project.getService(GitService.class).addCommitNumberToTestRun(latestTest);
         project.getService(TestRunEventPublisherService.class).publishTestRunProcessed(latestTest);
     }
 }

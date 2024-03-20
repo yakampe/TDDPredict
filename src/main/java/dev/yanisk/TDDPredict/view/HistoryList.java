@@ -1,7 +1,6 @@
 package dev.yanisk.TDDPredict.view;
 
 import com.intellij.ide.BrowserUtil;
-import git4idea.repo.GitRemote;
 
 import java.util.*;
 
@@ -12,9 +11,7 @@ import dev.yanisk.TDDPredict.models.Prediction;
 import dev.yanisk.TDDPredict.models.TestRun;
 import com.intellij.icons.AllIcons;
 import com.intellij.ui.components.JBLabel;
-import dev.yanisk.TDDPredict.service.GitService;
 import dev.yanisk.TDDPredict.util.ButtonColors;
-import git4idea.repo.GitRepository;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -129,53 +126,11 @@ public class HistoryList extends JBPanel implements TestRunEventBus {
                 Icon icon = testRun.getPrediction() == Prediction.CORRECT ? AllIcons.RunConfigurations.TestPassed : AllIcons.RunConfigurations.TestFailed;
                 historyContent.add(new JLabel(icon), historyGbc);
 
-                try {
-                    if(project.getService(GitService.class).getGitRepository().getRemotes().size() > 0) {
-                        //icon
-                        historyGbc.gridx = 3;
-                        JButton viewCommitButton = createViewCommitButton(testRun.getCommit());
-                        historyContent.add(viewCommitButton, historyGbc);
-                    }
-                } catch (Exception e) {
-                    //Threw an exception on PyCharm - probably because no remotes but just wrapping into 1.0.1
-                }
-
 
             }
 
             add(historyContent, BorderLayout.NORTH);
         }
-    }
-
-    private JButton createViewCommitButton(String commitHash) {
-        Icon viewIcon = AllIcons.Actions.Preview;
-        JButton viewCommitButton = new JButton(viewIcon);
-        // Remove button elements
-        viewCommitButton.setOpaque(false);
-        viewCommitButton.setContentAreaFilled(false);
-        viewCommitButton.setBorderPainted(false);
-        viewCommitButton.setFocusPainted(false);
-        viewCommitButton.setToolTipText("View");
-        // Remove margin
-        viewCommitButton.setMargin(new Insets(0, 0, 0, 0));
-        viewCommitButton.setPreferredSize(new Dimension(14,14));
-        viewCommitButton.addActionListener(e -> {
-            GitRepository repository = project.getService(GitService.class).getGitRepository(); // Your GitRepository instance here
-
-            Set<GitRemote> remotes =  new HashSet<>(repository.getRemotes());
-            if (!remotes.isEmpty()) {
-                GitRemote remote = remotes.iterator().next();
-                String remoteUrl = remote.getFirstUrl();
-
-                if (remoteUrl != null) {
-                    String baseUrl = remote.getFirstUrl().replaceFirst("\\.git","/");
-                    String commitUrl = baseUrl + "/commit/" + commitHash;
-                    BrowserUtil.browse(commitUrl);
-                }
-            }
-        });
-
-        return viewCommitButton;
     }
 
     private String getTimeString(long secondsSinceExecution) {
