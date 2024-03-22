@@ -25,6 +25,7 @@
     <change-notes>
         <![CDATA[
       <ul>
+        <li><b>1.0.7</b> Update computability with JetBrains 241.* and remove Git commit history functionality.</li>
         <li><b>1.0.6</b> Fixing an issue where release 1.0.5 lost functionality released in 1.0.4.</li>
         <li><b>1.0.5</b> Fixing plugin crash on Android Studio.</li>
         <li><b>1.0.4</b>
@@ -42,7 +43,6 @@
     </change-notes>
 
     <depends>com.intellij.modules.platform</depends>
-    <depends>Git4Idea</depends>
 
     <actions>
         <action id="TDDPredict.PredictPassAction"
@@ -77,8 +77,5 @@
         <listener
                 class="dev.yanisk.TDDPredict.listeners.TestListener"
                 topic="com.intellij.execution.testframework.sm.runner.SMTRunnerEventsListener"/>
-        <listener
-                class="dev.yanisk.TDDPredict.listeners.GitListener"
-                topic="git4idea.repo.GitRepositoryChangeListener"/>
     </projectListeners>
 </idea-plugin>

@@ -4,7 +4,7 @@ TDD Predict is a Test-Driven Development (TDD) Enhancement Plugin for IntelliJ. 
 
 [JetBrains Marketplace Link](https://plugins.jetbrains.com/plugin/21641-tdd-predict)
 
-![TDDPredict](https://cdn.discordapp.com/attachments/1077304012329721856/1103153885025140807/TDDPredict.gif)
+![TDDPredict](https://plugins.jetbrains.com/files/21641/screenshot_9270c26d-3e1c-4048-baae-c515fde6b5a2)
 
 ## Features
 

@@ -30,7 +30,6 @@
     </description>
 
     <depends>com.intellij.modules.platform</depends>
-    <depends>Git4Idea</depends>
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="dev.yanisk.TDDPredict.state.TDDPredictStateComponent"/>
         <toolWindow id="TDD Predict"
@@ -45,8 +44,5 @@
         <listener
                 class="dev.yanisk.TDDPredict.listeners.TestListener"
                 topic="com.intellij.execution.testframework.sm.runner.SMTRunnerEventsListener"/>
-        <listener
-                class="dev.yanisk.TDDPredict.listeners.GitListener"
-                topic="git4idea.repo.GitRepositoryChangeListener"/>
     </projectListeners>
 </idea-plugin>
